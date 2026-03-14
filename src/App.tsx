@@ -2,13 +2,14 @@ import './App.css';
 import TaskCreate from './components/TaskCreate';
 import TaskList from './components/TaskList';
 import { useState } from 'react';
-// index.js veya App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
+import type { Task } from './interfaces/Task';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const createTask = (title, taskDesc) => {
-    const createdTasks = [
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const createTask = (title: string, taskDesc: string): void => {
+    const createdTasks: Task[] = [
       ...tasks,
       {
         id: Math.round(Math.random() * 999999),
@@ -19,13 +20,12 @@ function App() {
     setTasks(createdTasks);
   };
 
-  const deleteTaskById = (id) => {
-    const afterDeletingTasks = tasks.filter((task) => {
-      return task.id !== id;
-    });
+  const deleteTaskById = (id: number): void => {
+    const afterDeletingTasks = tasks.filter((task) => task.id !== id);
     setTasks(afterDeletingTasks);
   };
-  const editTaskById = (id, updatedTitle, updatedTaskDesc) => {
+
+  const editTaskById = (id: number, updatedTitle: string, updatedTaskDesc: string): void => {
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         return { id, title: updatedTitle, taskDesc: updatedTaskDesc };

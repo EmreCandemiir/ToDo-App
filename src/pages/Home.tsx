@@ -1,7 +1,7 @@
 import TaskCreate from '../components/TaskCreate';
 import TaskList from '../components/TaskList';
 import { useState } from 'react';
-import { Task } from '../interfaces/Task';
+import type { Task } from '../interfaces/Task';
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);

@@ -1,70 +1,29 @@
-/*import { useState } from "react";
-import TaskCreate from "./TaskCreate";
-
-function TaskShow({ task, onDelete,onUpdate }) {
-
-  const [showEdit, setShowEdit] = useState(false);
-
-  const handleDeleteClick = () => {
-    onDelete(task.id);
-  };
-
-  const handleUpdateClick = () => {
-    setShowEdit(!showEdit);
-  };
-  const handleSubmit= (id,updatedTitle,updatedTaskDesc) => {
-    setShowEdit(false);
-    ontimeupdate(id,updatedTitle,updatedTaskDesc);
-  };
-
-  return (
-    <div className="task-show">
-
-      {showEdit ? (
-        <TaskCreate task={task} taskFormUpdate={true} onUpdate={handleSubmit}/>
-      ) : (
-        <div>
-          <h3 className="task-title">Göreviniz</h3>
-          <p>{task.title}</p>
-
-          <h3 className="task-title">Yapılacaklar</h3>
-          <p>{task.taskDesc}</p>
-
-          <div>
-            <button className="task-delete" onClick={handleDeleteClick}>
-              Sil
-            </button>
-
-            <button className="task-update" onClick={handleUpdateClick}>
-              Güncelle
-            </button>
-          </div>
-        </div>
-      )}
-
-    </div>
-  );
-}
-
-export default TaskShow;
-*/
 import { useState } from 'react';
 import TaskCreate from './TaskCreate';
+import type { Task } from '../interfaces/Task';
 
-function TaskShow({ task, onDelete, onUpdate }) {
-  const [showEdit, setShowEdit] = useState(false);
-  const handleDeleteClick = () => {
+interface TaskShowProps {
+  task: Task;
+  onDelete: (id: number) => void;
+  onUpdate: (id: number, updatedTitle: string, updatedTaskDesc: string) => void;
+}
+
+function TaskShow({ task, onDelete, onUpdate }: TaskShowProps) {
+  const [showEdit, setShowEdit] = useState<boolean>(false);
+
+  const handleDeleteClick = (): void => {
     onDelete(task.id);
   };
-  const handleEditClick = () => {
+
+  const handleEditClick = (): void => {
     setShowEdit(!showEdit);
   };
-  const handleSubmit = (id, updatedTitle, updatedTaskDesc) => {
+
+  const handleSubmit = (id: number, updatedTitle: string, updatedTaskDesc: string): void => {
     setShowEdit(false);
     onUpdate(id, updatedTitle, updatedTaskDesc);
   };
 
-  console.log(task);
   return (
     <div className="task-show">
       {showEdit ? (
